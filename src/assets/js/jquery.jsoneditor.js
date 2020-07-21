@@ -92,10 +92,6 @@ $.jsoneditor = {
 		
 		html+='<span class="je-node-op">';
 		
-		if (!root) html+='<span class="je-insert-node-brother" onclick="$.jsoneditor.insertNodeBrother(this);" title="insert a node before this node"></span><span class="je-insert-leaf-brother" onclick="$.jsoneditor.insertLeafBrother(this);"  title="insert a leaf before this node"></span>';
-		html+='<span class="je-add-node-child" onclick="$.jsoneditor.addNodeChild(this);" title="append a child node"></span><span class="je-add-leaf-child" onclick="$.jsoneditor.addLeafChild(this);" title="append a child leaf"></span>';
-		if (!root) html+='<span class="je-del" onclick="$.jsoneditor.del(this);"  title="delete this node"></span>';
-		
 		html+='</span>';
 		
 		html+='<div class="je-children">'+children.join('')+'</div>';
@@ -112,9 +108,9 @@ $.jsoneditor = {
 		html+='<span class="je-tree-leaf-icon"></span>';
 		
 		html+='<span class="je-key"><input class="je-key-input" type="text" value="'+key+'"/></span>';
-		html+=' : <span class="je-val"><input class="je-val-input" type="text" value="'+val+'"/></span>';
+		html+=' : <span class="je-val"><textarea class="je-val-input" wrap="soft" rows="1" value="'+val+'">'+val+'</textarea></span>';
 		
-		html+='<span class="je-leaf-op"><span class="je-insert-node-brother" onclick="$.jsoneditor.insertNodeBrother(this);" title="insert a node before this leaf"></span><span class="je-insert-leaf-brother" onclick="$.jsoneditor.insertLeafBrother(this);"  title="insert a leaf before this leaf"></span><span class="je-del" onclick="$.jsoneditor.del(this);"  title="delete this leaf"></span></span>';
+		html+='<span class="je-leaf-op"><span class="je-insert-node-brother glyphicon glyphicon-copy" onclick="$.jsoneditor.copyValue(this);" title="copy this to selected field"></span><span class="je-insert-leaf-brother glyphicon glyphicon-plus" onclick="$.jsoneditor.appendValue(this);"  title="append this to selected field"></span></span>';
 
 		html+='</div>';
 		
@@ -154,24 +150,23 @@ $.jsoneditor = {
 		$(span).parent().nextAll('div.je-children:first').append(this.parseLeaf('', '', layer+1)).show();
 	},
 	
-	insertNodeBrother:function(span) {
-		var layer=$(span).parent().prevAll('span.je-tab').length;
+	copyValue:function(span) {
+
+		textVal = $(span).parent().prev('span.je-val').children('textarea').val();
+		selectfield = document.forms["selectform"]["selectfield"].value;
+		document.forms["updateform"][selectfield].value=textVal;
 		
-		if ($(span).parent().hasClass('je-leaf-op')) {
-			$(span).parent().parent().before(this.parseNode('', {}, layer-1, false));
-		} else {
-			$(span).parent().parent().before(this.parseNode('', {}, layer, false));
-		}
 	},
 	
-	insertLeafBrother:function(span) {
-		var layer=$(span).parent().prevAll('span.je-tab').length;
+	appendValue:function(span) {
 		
-		if ($(span).parent().hasClass('je-leaf-op')) {
-			$(span).parent().parent().before(this.parseLeaf('', '', layer-1));
-		} else {
-			$(span).parent().parent().before(this.parseLeaf('', '', layer));
-		}
+		textVal = $(span).parent().prev('span.je-val').children('textarea').val();
+		selectfield = document.forms["selectform"]["selectfield"].value;
+		selectedfieldVal = document.forms["updateform"][selectfield].value;
+		if(selectfield=="historicalfact-urls-0")
+			$('#multiple-input').multipleInput('add',{textVal});
+		else
+			document.forms["updateform"][selectfield].value=selectedfieldVal+' '+textVal;
 	},
 	
 	del:function(span) {

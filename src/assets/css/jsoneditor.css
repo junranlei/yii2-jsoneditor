@@ -1,11 +1,22 @@
 @charset "utf-8";
 /* CSS Document */
 
-input.je-key-input, input.je-val-input{
+input.je-key-input{
 	border:none;
 	/*border-bottom:solid 1px #CCC;*/
 	text-align:center;
 	height:18px;
+	padding:0px;
+	margin:0px;
+	vertical-align:top;
+}
+
+textarea.je-val-input{
+	border:none;
+	/*border-bottom:solid 1px #CCC;*/
+	text-align:center;
+	line-height: 16px;
+	height:16px;
 	padding:0px;
 	margin:0px;
 	vertical-align:top;
@@ -74,13 +85,13 @@ input.je-key-input, input.je-val-input{
 	display:inline-table;
 	width:18px;
 	height:18px;
-	background:url(images/icon-folder-new.gif) no-repeat center center;
+	/*background:url(images/icon-folder-new.gif) no-repeat center center;*/
 }
 .je-insert-leaf-brother{
 	display:inline-table;
 	width:18px;
 	height:18px;
-	background:url(images/icon-list-new.gif) no-repeat center center;
+	/*background:url(images/icon-list-new.gif) no-repeat center center;*/
 }
 .je-add-node-child{
 	display:inline-table;
