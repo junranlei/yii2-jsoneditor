@@ -1,10 +1,8 @@
-# JsonEditor widget for Yii2 Framework uses Json Editor plugin for jQuery
-[JsonEditor widget demo page](http://yii2.kadastrcard.ru/jsoneditor)
+Customised Json Editor plugin from https://github.com/SlavKoVrn/yii2-jsoneditor
 
 The extension uses Json Editor plugin by Author Jadesoul http://jadesoul.org for jQuery 
 and makes user interface for changing json values.
 
-![JsonEditor widget](http://yii2.kadastrcard.ru/uploads/jsoneditor.jpg)
 
 ## Installation
 
@@ -51,4 +49,4 @@ use yii\helpers\Html;
 
     <?php ActiveForm::end(); ?>​
 ```
-<a href="mailto:slavko.chita@gmail.com">write comments to admin</a>
+
